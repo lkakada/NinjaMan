@@ -56,17 +56,7 @@
 	<div>Score: <span id="score">0</span></div>
 </body>
 	<script type="text/javascript">
-		var world = [
-			[1,1,1,1,1,1,1],
-			[1,0,2,2,3,2,1],
-			[1,2,1,2,3,2,1],
-			[1,2,2,2,1,1,1],
-			[1,2,1,2,1,2,1],
-			[1,2,2,2,1,3,1],
-			[1,2,1,2,3,3,1],
-			[1,2,2,2,1,2,1],
-			[1,1,1,1,1,1,1],
-		];
+		var world = generateArrayList(10,10);
 
 		var worldDict = {
 			0: "blank",
@@ -81,6 +71,39 @@
 			score: 0
 		}
 
+		function generateArray(maxlength) {
+		  	var arr = [];
+			  	for(var i = 0; i < maxlength; i++) {
+				    if(i === 0 || i === maxlength -1) {
+				      arr[i] = 1;
+				    }else{
+				      arr[i] = Math.floor(Math.random() * 4);
+				    }
+				  }
+			return arr;
+			}
+		function generateArrayList(rows, cols) {
+		  	var newArr = [];
+		  	var indexOne = []
+
+			for(var i = 0; i < rows; i++) {
+			    if(i === 0 || i === rows - 1) {
+			        newArr[i] = generateIndexOne(cols);
+			    }else{
+			        newArr[i] = generateArray(cols);
+			    }
+			  }
+			return newArr;
+			}
+
+			function generateIndexOne(maxlength){
+			   var arr = [];
+			   for(var i = 0; i < maxlength; i++) {
+			    arr[i] = 1;
+			  }
+			  return arr;
+			}
+		
 
 		function drawWorld() {
 			output = "";
@@ -136,7 +159,6 @@
 			drawNinjaman();
 			
 		}
-
 		drawWorld();
 		drawNinjaman();
 
