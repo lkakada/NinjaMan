@@ -39,6 +39,15 @@
 			width: 40px;
 			display: inline-block;
 		}
+		#ghost {
+			background-image: url('img/pumpky.gif');
+			height: 40px;
+			width: 40px;
+			background-size: contain;
+			background-color: black;
+			position: absolute;
+			display: inline-block;
+		}
 		#ninja {
 			background-color: black;
 			height: 40px;
@@ -53,6 +62,7 @@
 <body>
 	<div id="world"></div>
 	<div id="ninja"></div>
+	<div id="ghost"></div>
 	<div>Score: <span id="score">0</span></div>
 </body>
 	<script type="text/javascript">
@@ -69,6 +79,11 @@
 			x: 1,
 			y: 1,
 			score: 0
+		}
+
+		var ghost ={
+			x: 4,
+			y: 8
 		}
 
 		function generateArray(maxlength) {
@@ -124,6 +139,13 @@
 			document.getElementById('ninja').style.left = ninja.x * 40 + 'px';
 		}
 
+		function drawGhost() {
+			document.getElementById('ghost').style.top = ghost.y * 40 + 'px';
+			document.getElementById('ghost').style.left = ghost.x * 40 + 'px';
+
+			setTimeout(drawGhost, 100);
+		}
+
 
 		document.onkeydown = function(e) {
 			if(e.keyCode == 37) {
@@ -157,10 +179,11 @@
 			world[ninja.y][ninja.x] = 0;
 			drawWorld();
 			drawNinjaman();
-			
+
 		}
 		drawWorld();
 		drawNinjaman();
+		drawGhost();
 
 	</script>
 </html>
